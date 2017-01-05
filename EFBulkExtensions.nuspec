@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>EFBulkExtensions</id>
+    <version>0.1</version>
+    <title>EntityFramework Bulk Extensions</title>
+    <authors>Andrei Sabau</authors>
+    <owners>Andrei Sabau</owners>
+    <licenseUrl>https://github.com/andreisabau/EFBulkExtensions/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/andreisabau/EFBulkExtensions</projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides bulk operation for EntityFramework.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2017 Andrei Sabau</copyright>
+    <tags>ef entityframework entity framework bulk bulkinsert</tags>
+  </metadata>
+</package>
