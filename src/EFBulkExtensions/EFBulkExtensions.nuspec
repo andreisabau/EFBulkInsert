@@ -15,4 +15,8 @@
     <copyright>Copyright 2017 Andrei Sabau</copyright>
     <tags>ef entityframework entity framework bulk bulkinsert</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\net451\EFBulkExtensions.dll" target="lib\net451" />
+    <file src="bin\Release\net451\EFBulkExtensions.pdb" target="lib\net451" />
+  </files>
 </package>

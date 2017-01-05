@@ -5,8 +5,8 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using EFBulkExtensions.BulkInsert.Extensions;
-using EFBulkExtensions.BulkInsert.Models;
+using EFBulkExtensions.Extensions;
+using EFBulkExtensions.Models;
 
 namespace EFBulkExtensions.BulkInsert
 {

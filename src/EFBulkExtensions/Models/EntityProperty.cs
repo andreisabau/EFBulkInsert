@@ -1,4 +1,4 @@
-namespace EFBulkExtensions.BulkInsert.Models
+namespace EFBulkExtensions.Models
 {
     internal class EntityProperty
     {

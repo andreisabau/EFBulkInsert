@@ -6,9 +6,9 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
-using EFBulkExtensions.BulkInsert.Models;
+using EFBulkExtensions.Models;
 
-namespace EFBulkExtensions.BulkInsert.Extensions
+namespace EFBulkExtensions.Extensions
 {
     internal static class DbContextExtensions
     {
