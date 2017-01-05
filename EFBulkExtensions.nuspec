@@ -8,9 +8,9 @@
     <owners>Andrei Sabau</owners>
     <licenseUrl>https://github.com/andreisabau/EFBulkExtensions/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/andreisabau/EFBulkExtensions</projectUrl>
-    <iconUrl></iconUrl>
+    <iconUrl>https://github.com/andreisabau.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Provides bulk operation for EntityFramework.</description>
+    <description>Provides bulk operations for EntityFramework.</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2017 Andrei Sabau</copyright>
     <tags>ef entityframework entity framework bulk bulkinsert</tags>
