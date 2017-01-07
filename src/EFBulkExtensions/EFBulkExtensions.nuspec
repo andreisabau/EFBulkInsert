@@ -5,15 +5,11 @@
     <version>0.1</version>
     <title>EntityFramework Bulk Extensions</title>
     <authors>Andrei Sabau</authors>
-    <owners>Andrei Sabau</owners>
     <licenseUrl>https://github.com/andreisabau/EFBulkExtensions/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/andreisabau/EFBulkExtensions</projectUrl>
     <iconUrl>https://github.com/andreisabau.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Provides bulk operations for EntityFramework.</description>
-    <releaseNotes></releaseNotes>
-    <copyright>Copyright 2017 Andrei Sabau</copyright>
-    <tags>ef entityframework entity framework bulk bulkinsert</tags>
+    <description>Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.</description>
+    <tags>ef entityframework entity framework bulk insert bulkinsert</tags>
   </metadata>
   <files>
     <file src="bin\Release\net451\EFBulkExtensions.dll" target="lib\net451" />
