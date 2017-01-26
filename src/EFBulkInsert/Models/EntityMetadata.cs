@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EFBulkExtensions.Models
+namespace EFBulkInsert.Models
 {
     internal class EntityMetadata
     {

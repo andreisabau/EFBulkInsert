@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
-using EFBulkExtensions.Extensions;
-using EFBulkExtensions.Models;
+using EFBulkInsert.Extensions;
+using EFBulkInsert.Models;
+using System.Linq;
 
-namespace EFBulkExtensions.BulkInsert
+namespace EFBulkInsert
 {
     public static class BulkInsertExtension
     {

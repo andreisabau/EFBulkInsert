@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>EFBulkExtensions</id>
+    <id>EFBulkInsert</id>
     <version>0.1</version>
-    <title>EntityFramework Bulk Extensions</title>
+    <title>EntityFramework Bulk Insert</title>
     <authors>Andrei Sabau</authors>
-    <licenseUrl>https://github.com/andreisabau/EFBulkExtensions/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/andreisabau/EFBulkExtensions</projectUrl>
+    <licenseUrl>https://github.com/andreisabau/EFBulkInsert/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/andreisabau/EFBulkInsert</projectUrl>
     <iconUrl>https://github.com/andreisabau.png</iconUrl>
     <description>Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.</description>
     <tags>ef entityframework entity framework bulk insert bulkinsert</tags>
   </metadata>
   <files>
-    <file src="bin\Release\net451\EFBulkExtensions.dll" target="lib\net451" />
-    <file src="bin\Release\net451\EFBulkExtensions.pdb" target="lib\net451" />
+    <file src="bin\Release\net451\EFBulkInsert.dll" target="lib\net451" />
+    <file src="bin\Release\net451\EFBulkInsert.pdb" target="lib\net451" />
   </files>
 </package>
