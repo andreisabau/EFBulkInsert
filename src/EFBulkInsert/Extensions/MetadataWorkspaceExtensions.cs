@@ -16,22 +16,22 @@ namespace EFBulkInsert.Extensions
             return entityType;
         }
 
-        public static MappingFragment GetMappings<T>(this MetadataWorkspace metadataWorkspace)
+        public static MappingFragment GetMapping<T>(this MetadataWorkspace metadataWorkspace)
         {
-            EntityType objectSpaceEntityType = metadataWorkspace.GetObjectSpaceEntityByType<T>();
+            EntityType entityType = metadataWorkspace.GetObjectSpaceEntityByType<T>();
 
             EntitySet entitySet = metadataWorkspace.GetItems<EntityContainer>(DataSpace.CSpace)
                                                    .SelectMany(x => x.EntitySets)
-                                                   .FirstOrDefault(x => x.ElementType.Name == objectSpaceEntityType.Name);
+                                                   .FirstOrDefault(x => x.ElementType.Name == entityType.Name);
 
             EntitySetMapping entitySetMapping = metadataWorkspace.GetItems<EntityContainerMapping>(DataSpace.CSSpace)
                                                                  .SelectMany(x => x.EntitySetMappings)
                                                                  .First(x => x.EntitySet == entitySet);
 
-            MappingFragment entityType = entitySetMapping.EntityTypeMappings.SelectMany(x => x.Fragments)
+            MappingFragment mappingFragment = entitySetMapping.EntityTypeMappings.SelectMany(x => x.Fragments)
                                                                             .First();
 
-            return entityType;
+            return mappingFragment;
         }
     }
 }

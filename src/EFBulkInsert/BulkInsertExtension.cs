@@ -7,6 +7,7 @@ using System.Reflection;
 using EFBulkInsert.Extensions;
 using EFBulkInsert.Models;
 using System.Linq;
+using static System.String;
 
 namespace EFBulkInsert
 {
@@ -59,7 +60,7 @@ namespace EFBulkInsert
             dataTable.Columns.Add("ArrayIndex", typeof(long));
             columns.Add("ArrayIndex bigint");
 
-            string createTableQuery = $"CREATE TABLE {entityMetadata.TempTableName} ({String.Join(",", columns)})";
+            string createTableQuery = $"CREATE TABLE {entityMetadata.TempTableName} ({Join(",", columns)})";
 
             dbContext.Database.ExecuteSqlCommand(createTableQuery);
 
@@ -81,9 +82,9 @@ namespace EFBulkInsert
 
         private static DataSet MergeDataIntoOriginalTable(DbContext dbContext, EntityMetadata entityMetadata)
         {
-            string generatedColumnNames = String.Join(",", entityMetadata.Properties.Where(x => x.IsDbGenerated).Select(x => $"INSERTED.[{x.ColumnName}]"));
+            string generatedColumnNames = Join(",", entityMetadata.Properties.Where(x => x.IsDbGenerated).Select(x => $"INSERTED.[{x.ColumnName}]"));
 
-            string columns = String.Join(",", entityMetadata.Properties.Where(x => !x.IsDbGenerated).Select(x => $"[{x.ColumnName}]"));
+            string columns = Join(",", entityMetadata.Properties.Where(x => !x.IsDbGenerated).Select(x => $"[{x.ColumnName}]"));
 
             SqlCommand sqlCommand = new SqlCommand($@"MERGE INTO {entityMetadata.TableName} AS DestinationTable
                                                       USING (SELECT * FROM {entityMetadata.TempTableName}) AS TempTable

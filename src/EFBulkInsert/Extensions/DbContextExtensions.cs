@@ -29,7 +29,7 @@ namespace EFBulkInsert.Extensions
         public static EntityMetadata GetEntityMetadata<T>(this DbContext dbContext)
         {
             MetadataWorkspace metadataWorkspace = dbContext.GetObjectContext().MetadataWorkspace;
-            MappingFragment mappingFragment = metadataWorkspace.GetMappings<T>();
+            MappingFragment mappingFragment = metadataWorkspace.GetMapping<T>();
             EntityType storageSpaceEntityType = mappingFragment.StoreEntitySet.ElementType;
 
             EntityMetadata entityMetadata = new EntityMetadata
