@@ -10,7 +10,7 @@ Usage:
 
 ```csharp
 
-dbContext.BulkInsert(entites); // bulk insert with split into batches of 5000
+dbContext.BulkInsert(entites);
 
 dbContext.BulkInsert(entities, 10000); // bulk insert with batch size of 10000
 
