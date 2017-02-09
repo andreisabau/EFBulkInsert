@@ -13,7 +13,7 @@ namespace EFBulkInsert
 {
     public static class BulkInsertExtension
     {
-        public static void BulkInsert<T>(this DbContext dbContext, IEnumerable<T> entites)
+        public static void BulkInsert<T>(this DbContext dbContext, IEnumerable<T> entites, int batchSize = 5000)
         {
             T[] entitiesArray = entites.ToArray();
 
@@ -25,11 +25,16 @@ namespace EFBulkInsert
 
                 DataTable dataTable = CreateTempTable<T>(dbContext, entityMetadata);
 
-                InsertDataIntoTempTable(dbContext, entityMetadata, entitiesArray, dataTable);
+                for (int i = 0; i < entitiesArray.Length; i+=batchSize)
+                {
+                    T[] entitiesInBatch = entitiesArray.Skip(i).Take(batchSize).ToArray();
 
-                DataSet dataSet = MergeDataIntoOriginalTable(dbContext, entityMetadata);
+                    InsertDataIntoTempTable(dbContext, entityMetadata, i, entitiesInBatch, dataTable);
 
-                CopyGeneratedPropertiesToEntities(entityMetadata, dataSet, entitiesArray);
+                    DataSet dataSet = MergeDataIntoOriginalTable(dbContext, entityMetadata, i);
+
+                    CopyGeneratedPropertiesToEntities(entityMetadata, dataSet, entitiesInBatch, i);
+                }
 
                 DropTempTable(dbContext, entityMetadata);
             }
@@ -67,27 +72,29 @@ namespace EFBulkInsert
             return dataTable;
         }
 
-        private static void CopyGeneratedPropertiesToEntities<T>(EntityMetadata entityMetadata, DataSet mergeResult, T[] entities)
+        private static void CopyGeneratedPropertiesToEntities<T>(EntityMetadata entityMetadata, DataSet mergeResult, T[] entities, int startIndex)
         {
             foreach (EntityProperty property in entityMetadata.Properties.Where(x => x.IsDbGenerated))
             {
                 for (int i = 0; i < mergeResult.Tables[0].Rows.Count; i++)
                 {
-                    T entity = entities[(long)mergeResult.Tables[0].Rows[i]["ArrayIndex"]];
+                    long index = (long)mergeResult.Tables[0].Rows[i]["ArrayIndex"] - startIndex;
+
+                    T entity = entities[index];
 
                     entity.GetType().GetProperty(property.PropertyName).SetValue(entity, mergeResult.Tables[0].Rows[i][property.ColumnName]);
                 }
             }
         }
 
-        private static DataSet MergeDataIntoOriginalTable(DbContext dbContext, EntityMetadata entityMetadata)
+        private static DataSet MergeDataIntoOriginalTable(DbContext dbContext, EntityMetadata entityMetadata, int startIndex)
         {
             string generatedColumnNames = Join(",", entityMetadata.Properties.Where(x => x.IsDbGenerated).Select(x => $"INSERTED.[{x.ColumnName}]"));
 
             string columns = Join(",", entityMetadata.Properties.Where(x => !x.IsDbGenerated).Select(x => $"[{x.ColumnName}]"));
 
             SqlCommand sqlCommand = new SqlCommand($@"MERGE INTO {entityMetadata.TableName} AS DestinationTable
-                                                      USING (SELECT * FROM {entityMetadata.TempTableName}) AS TempTable
+                                                      USING (SELECT * FROM {entityMetadata.TempTableName} WHERE ArrayIndex >= {startIndex}) AS TempTable
                                                       ON 1 = 2
                                                       WHEN NOT MATCHED THEN INSERT ({columns}) VALUES ({columns})
                                                       OUTPUT TempTable.ArrayIndex, {generatedColumnNames};", 
@@ -100,12 +107,14 @@ namespace EFBulkInsert
             return dataSet;
         }
 
-        private static void InsertDataIntoTempTable<T>(DbContext dbContext, EntityMetadata entityMetadata, T[] entities, DataTable dataTable)
+        private static void InsertDataIntoTempTable<T>(DbContext dbContext, EntityMetadata entityMetadata, int startIndex, T[] entities, DataTable dataTable)
         {
             SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(dbContext.GetSqlConnection())
             {
                 DestinationTableName = entityMetadata.TempTableName
             };
+
+            dataTable.Clear();
 
             for (int i = 0; i < entities.Length; i++)
             {
@@ -113,7 +122,7 @@ namespace EFBulkInsert
                                                                 .Select(property => GetPropertyValueOrDbNull(typeof(T).GetProperty(property.PropertyName).GetValue(entities[i], null)))
                                                                 .ToList();
 
-                objects.Add(i);
+                objects.Add(startIndex+i);
                 dataTable.Rows.Add(objects.ToArray());
             }
 
