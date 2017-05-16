@@ -1,8 +1,8 @@
  [![andreisabau MyGet Build Status](https://www.myget.org/BuildSource/Badge/andreisabau?identifier=0dd80dc9-0ef7-4b80-a451-42ca280d27f0)](https://www.myget.org/)
 ## EFBulkInsert
-####Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.
--
-###`BulkInsert<T>(IEnumerable<T> entities, int batchSize = 5000)`
+#### Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.
+
+### `BulkInsert<T>(IEnumerable<T> entities, int batchSize = 5000)`
 
 Allows fast insertion of entities in bulk with retrieval of the generated identity column.
 
