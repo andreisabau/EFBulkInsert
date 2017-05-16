@@ -29,7 +29,7 @@ namespace EFBulkInsert.Extensions
                                                                  .First(x => x.EntitySet == entitySet);
 
             MappingFragment mappingFragment = entitySetMapping.EntityTypeMappings.SelectMany(x => x.Fragments)
-                                                                            .First();
+                                                                                 .First();
 
             return mappingFragment;
         }

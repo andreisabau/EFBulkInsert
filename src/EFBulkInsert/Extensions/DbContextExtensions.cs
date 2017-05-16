@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EFBulkInsert.Models;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Core.Mapping;
 using System.Data.Entity.Core.Metadata.Edm;
@@ -6,7 +7,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
-using EFBulkInsert.Models;
+using static System.String;
 
 namespace EFBulkInsert.Extensions
 {
@@ -72,7 +73,7 @@ namespace EFBulkInsert.Extensions
                 string length = edmProperty.Scale.HasValue ? edmProperty.Precision.HasValue ? $"({edmProperty.Precision},{edmProperty.Scale})"
                                                                                             : $"({edmProperty.Precision})"
                                                            : edmProperty.MaxLength.HasValue ? $"({edmProperty.MaxLength})"
-                                                                                            : String.Empty;
+                                                                                            : Empty;
 
                 type = type + length;
             }
