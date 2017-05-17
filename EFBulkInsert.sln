@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6F960824-3555-46A2-9F92-061E7C5F5931}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFBulkInsert", "src\EFBulkInsert\EFBulkInsert.csproj", "{3792C4FE-B308-4AD0-9397-AD3259AC5E9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFBulkInsert", "EFBulkInsert\EFBulkInsert.csproj", "{8E0815DE-08AB-4003-A02E-2F1553832C94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,15 +11,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3792C4FE-B308-4AD0-9397-AD3259AC5E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3792C4FE-B308-4AD0-9397-AD3259AC5E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3792C4FE-B308-4AD0-9397-AD3259AC5E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3792C4FE-B308-4AD0-9397-AD3259AC5E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E0815DE-08AB-4003-A02E-2F1553832C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0815DE-08AB-4003-A02E-2F1553832C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E0815DE-08AB-4003-A02E-2F1553832C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E0815DE-08AB-4003-A02E-2F1553832C94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{3792C4FE-B308-4AD0-9397-AD3259AC5E9B} = {6F960824-3555-46A2-9F92-061E7C5F5931}
 	EndGlobalSection
 EndGlobal
