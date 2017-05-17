@@ -28,4 +28,4 @@ Performance improvements
 | 500000      | 3916 ms    | N/A  |
 | 1000000     | 7769 ms    | N/A  |
 
-Tests made with: SQL Server 2016, EntityFramework 6.1.3 and EFBulkExtensions 0.1.0;
+Tests made with: SQL Server 2016, EntityFramework 6.1.3 and EFBulkExtensions 0.1.0.
