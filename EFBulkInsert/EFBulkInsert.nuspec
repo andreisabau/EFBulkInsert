@@ -3,7 +3,7 @@
   <metadata>
     <id>EFBulkInsert</id>
     <version>0.2.0</version>
-    <title>EntityFramework Bulk Insert</title>
+    <title>EFBulkInsert</title>
     <authors>Andrei Sabau</authors>
     <licenseUrl>https://github.com/andreisabau/EFBulkInsert/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/andreisabau/EFBulkInsert</projectUrl>
