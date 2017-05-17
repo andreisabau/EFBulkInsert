@@ -12,7 +12,7 @@
     <tags>ef entityframework entity framework bulk insert bulkinsert</tags>
   </metadata>
   <files>
-    <file src="bin\Release\net451\EFBulkInsert.dll" target="lib\net451" />
-    <file src="bin\Release\net451\EFBulkInsert.pdb" target="lib\net451" />
+    <file src="bin\Release\net452\EFBulkInsert.dll" target="lib\net452" />
+    <file src="bin\Release\net452\EFBulkInsert.pdb" target="lib\net452" />
   </files>
 </package>
