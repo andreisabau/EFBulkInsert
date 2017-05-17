@@ -25,7 +25,7 @@ namespace EFBulkInsert
 
                 DataTable dataTable = CreateTempTable<T>(dbContext, entityMetadata);
 
-                for (int i = 0; i < entitiesArray.Length; i+=batchSize)
+                for (int i = 0; i < entitiesArray.Length; i += batchSize)
                 {
                     T[] entitiesInBatch = entitiesArray.Skip(i).Take(batchSize).ToArray();
 
@@ -97,8 +97,8 @@ namespace EFBulkInsert
                                                       USING (SELECT * FROM {entityMetadata.TempTableName} WHERE ArrayIndex >= {startIndex}) AS TempTable
                                                       ON 1 = 2
                                                       WHEN NOT MATCHED THEN INSERT ({columns}) VALUES ({columns})
-                                                      OUTPUT TempTable.ArrayIndex, {generatedColumnNames};", 
-                                                   dbContext.GetSqlConnection());
+                                                      OUTPUT TempTable.ArrayIndex, {generatedColumnNames};",
+                                                   dbContext.GetSqlConnection(), dbContext.GetSqlTransaction());
 
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
             DataSet dataSet = new DataSet();
@@ -109,7 +109,7 @@ namespace EFBulkInsert
 
         private static void InsertDataIntoTempTable<T>(DbContext dbContext, EntityMetadata entityMetadata, int startIndex, T[] entities, DataTable dataTable)
         {
-            SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(dbContext.GetSqlConnection())
+            SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(dbContext.GetSqlConnection(), SqlBulkCopyOptions.Default, dbContext.GetSqlTransaction())
             {
                 DestinationTableName = entityMetadata.TempTableName
             };
@@ -122,13 +122,13 @@ namespace EFBulkInsert
                                                                 .Select(property => GetPropertyValueOrDbNull(typeof(T).GetProperty(property.PropertyName).GetValue(entities[i], null)))
                                                                 .ToList();
 
-                objects.Add(startIndex+i);
+                objects.Add(startIndex + i);
                 dataTable.Rows.Add(objects.ToArray());
             }
 
             sqlBulkCopy.WriteToServer(dataTable);
         }
-        
+
         private static void DropTempTable(DbContext dbContext, EntityMetadata entityMetadata)
         {
             dbContext.Database.ExecuteSqlCommand($"DROP TABLE {entityMetadata.TempTableName}");

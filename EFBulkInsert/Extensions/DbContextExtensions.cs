@@ -20,6 +20,13 @@ namespace EFBulkInsert.Extensions
             return sqlConnection;
         }
 
+        public static SqlTransaction GetSqlTransaction(this DbContext dbContext)
+        {
+            SqlTransaction sqlTransaction = (SqlTransaction)dbContext.Database.CurrentTransaction?.UnderlyingTransaction;
+
+            return sqlTransaction;
+        }
+
         public static ObjectContext GetObjectContext(this DbContext dbContext)
         {
             ObjectContext objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
@@ -36,7 +43,7 @@ namespace EFBulkInsert.Extensions
             EntityMetadata entityMetadata = new EntityMetadata
             {
                 TempTableName = "##TEMP_" + Guid.NewGuid().ToString().Replace('-', '_'),
-                Type = typeof (T),
+                Type = typeof(T),
                 TableName = storageSpaceEntityType.Name,
                 Properties = storageSpaceEntityType.Properties.Select(x => new EntityProperty
                 {
@@ -53,7 +60,7 @@ namespace EFBulkInsert.Extensions
 
         private static string GetPropertyName(MappingFragment mappingFragment, EdmProperty x)
         {
-            ScalarPropertyMapping scalarPropertyMapping = mappingFragment.PropertyMappings.Select(y => (ScalarPropertyMapping) y)
+            ScalarPropertyMapping scalarPropertyMapping = mappingFragment.PropertyMappings.Select(y => (ScalarPropertyMapping)y)
                                                                                           .FirstOrDefault(y => y.Column.Name == x.Name);
 
             if (scalarPropertyMapping != null)
