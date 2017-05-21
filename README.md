@@ -29,3 +29,10 @@ Performance improvements
 | 1000000     | 7769 ms    | N/A  |
 
 Tests made with: SQL Server 2016, EntityFramework 6.1.3 and EFBulkExtensions 0.1.0.
+
+### Version history
+#### v0.2.0
+ - Fixed: Support for transactions
+
+#### v0.1.0
+ - Initial release
