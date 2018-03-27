@@ -44,7 +44,7 @@ namespace EFBulkInsert.Extensions
             {
                 TempTableName = "##TEMP_" + Guid.NewGuid().ToString().Replace('-', '_'),
                 Type = typeof(T),
-                TableName = storageSpaceEntityType.Name,
+                TableName = mappingFragment.GetTableName(),
                 Properties = storageSpaceEntityType.Properties.Select(x => new EntityProperty
                 {
                     ColumnName = x.Name,

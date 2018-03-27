@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>EFBulkInsert</id>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <title>EFBulkInsert</title>
     <authors>Andrei Sabau</authors>
     <licenseUrl>https://github.com/andreisabau/EFBulkInsert/blob/master/LICENSE</licenseUrl>

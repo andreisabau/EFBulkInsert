@@ -89,7 +89,10 @@ namespace EFBulkInsert
 
         private static DataSet MergeDataIntoOriginalTable(DbContext dbContext, EntityMetadata entityMetadata, int startIndex)
         {
-            string generatedColumnNames = Join(",", entityMetadata.Properties.Where(x => x.IsDbGenerated).Select(x => $"INSERTED.[{x.ColumnName}]"));
+            string generatedColumnNames =
+                entityMetadata.Properties.Any(x => x.IsDbGenerated)
+                    ? $", {Join(",", entityMetadata.Properties.Where(x => x.IsDbGenerated).Select(x => $"INSERTED.[{x.ColumnName}]"))}"
+                    : Empty;
 
             string columns = Join(",", entityMetadata.Properties.Where(x => !x.IsDbGenerated).Select(x => $"[{x.ColumnName}]"));
 
@@ -97,7 +100,7 @@ namespace EFBulkInsert
                                                       USING (SELECT * FROM {entityMetadata.TempTableName} WHERE ArrayIndex >= {startIndex}) AS TempTable
                                                       ON 1 = 2
                                                       WHEN NOT MATCHED THEN INSERT ({columns}) VALUES ({columns})
-                                                      OUTPUT TempTable.ArrayIndex, {generatedColumnNames};",
+                                                      OUTPUT TempTable.ArrayIndex{generatedColumnNames};",
                                                    dbContext.GetSqlConnection(), dbContext.GetSqlTransaction());
 
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
