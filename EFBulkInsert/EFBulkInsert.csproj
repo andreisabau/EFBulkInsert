@@ -11,6 +11,7 @@
         <PackageIconUrl>https://github.com/andreisabau.png</PackageIconUrl>
         <Description>Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.</Description>
         <PackageTags>ef entityframework entity framework bulk insert bulkinsert entityframeworkcore core dotnet dot net</PackageTags>
+        <RepositoryUrl>https://github.com/andreisabau/EFBulkInsert</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
