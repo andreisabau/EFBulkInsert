@@ -1,4 +1,4 @@
- [![andreisabau MyGet Build Status](https://www.myget.org/BuildSource/Badge/andreisabau?identifier=60d1d230-6689-4c3f-afc9-4f1575fcbe96)](https://www.myget.org/)
+![CI](https://github.com/andreisabau/EFBulkInsert/workflows/CI/badge.svg)
 ## EFBulkInsert
 #### Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.
 
