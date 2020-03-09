@@ -59,5 +59,3 @@ Tests made with: SQL Server 2016, EntityFramework 6.1.3 and EFBulkExtensions 0.1
 
 ##### v0.1.0 (2017-01-26)
  - Initial release
- 
-https://www.nuget.org/packages/EFBulkInsert/
