@@ -2,7 +2,6 @@
 ![Nuget](https://img.shields.io/nuget/v/EFBulkInsert)
 ![Nuget](https://img.shields.io/nuget/dt/EFBulkInsert)
 ## EFBulkInsert
-https://www.nuget.org/packages/EFBulkInsert/
 #### Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.
 
 ### `BulkInsert<T>(IEnumerable<T> entities, int batchSize = 5000)`
@@ -60,3 +59,5 @@ Tests made with: SQL Server 2016, EntityFramework 6.1.3 and EFBulkExtensions 0.1
 
 ##### v0.1.0 (2017-01-26)
  - Initial release
+ 
+https://www.nuget.org/packages/EFBulkInsert/
