@@ -17,6 +17,7 @@
         <Copyright>Andrei Sabau</Copyright>
         <Version>0.4.0</Version>
         <PackageIcon>icon.png</PackageIcon>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
@@ -30,6 +31,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
       <None Include="icon.png">
         <Pack>True</Pack>
         <PackagePath></PackagePath>
