@@ -8,10 +8,15 @@
         <Authors>Andrei Sabau</Authors>
         <License>https://github.com/andreisabau/EFBulkInsert/blob/master/LICENSE</License>
         <PackageProjectUrl>https://github.com/andreisabau/EFBulkInsert</PackageProjectUrl>
-        <PackageIconUrl>https://github.com/andreisabau.png</PackageIconUrl>
         <Description>Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.</Description>
         <PackageTags>ef entityframework entity framework bulk insert bulkinsert entityframeworkcore core dotnet dot net</PackageTags>
         <RepositoryUrl>https://github.com/andreisabau/EFBulkInsert</RepositoryUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyVersion>0.4.0.0</AssemblyVersion>
+        <FileVersion>0.4.0.0</FileVersion>
+        <Copyright>Andrei Sabau</Copyright>
+        <Version>0.4.0</Version>
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
@@ -22,5 +27,12 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
         <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 </Project>
