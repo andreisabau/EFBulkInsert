@@ -18,7 +18,6 @@ jobs:
       run: dotnet pack -c Release
     - name: Add sourece to NuGet
       run: nuget sources add -Name "GitHub" -Source "https://nuget.pkg.github.com/andreisabau/index.json" -Username andreisabau -Password ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish
-      run: |
-        nuget push "EFBulkInsert\bin\Release\EFBulkInsert.*.nupkg" -Source "GitHub"
-        nuget push "EFBulkInsertCore\bin\Release\EFBulkInsert.*.nupkg" -Source "GitHub"
+#    - name: Publish
+#      run: |
+#        nuget push "EFBulkInsert\bin\Release\EFBulkInsert.*.nupkg" -Source "GitHub"
