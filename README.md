@@ -31,6 +31,9 @@ Performance improvements
 Tests made with: SQL Server 2016, EntityFramework 6.1.3 and EFBulkExtensions 0.1.0.
 
 ### Version history
+#### v0.4.0
+ - Added: Support for Entity Framework Core
+ 
 #### v0.3.0
  - Added: Support for schemas
  - Fixed: Inserting into tables without identity columns
