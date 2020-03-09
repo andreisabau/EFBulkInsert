@@ -1,4 +1,4 @@
-name: Pack & publish
+name: Pack
 
 on: [push]
 
