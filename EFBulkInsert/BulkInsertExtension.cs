@@ -1,4 +1,5 @@
-﻿using EFBulkInsert.Extensions;
+﻿#if NET452
+using EFBulkInsert.Extensions;
 using EFBulkInsert.Models;
 using System;
 using System.Collections.Generic;
@@ -155,3 +156,4 @@ namespace EFBulkInsert
         }
     }
 }
+#endif

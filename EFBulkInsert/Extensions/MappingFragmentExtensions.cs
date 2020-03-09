@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.Core.Mapping;
+﻿#if NET452
+using System.Data.Entity.Core.Mapping;
 
 namespace EFBulkInsert.Extensions
 {
@@ -14,3 +15,4 @@ namespace EFBulkInsert.Extensions
         }
     }
 }
+#endif

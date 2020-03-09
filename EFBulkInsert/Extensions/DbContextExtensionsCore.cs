@@ -1,14 +1,15 @@
+#if NETSTANDARD2_0
 using System;
 using System.Linq;
-using EFBulkInsertCore.Models;
+using EFBulkInsert.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace EFBulkInsertCore.Extensions
+namespace EFBulkInsert.Extensions
 {
-    internal static class DbContextExtensions
+    internal static class DbContextExtensionsCore
     {
         public static SqlConnection GetSqlConnection(this DbContext dbContext)
         {
@@ -59,3 +60,4 @@ namespace EFBulkInsertCore.Extensions
         }
     }
 }
+#endif

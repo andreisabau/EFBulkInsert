@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.Core.Mapping;
+﻿#if NET452
+using System.Data.Entity.Core.Mapping;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 
@@ -35,3 +36,4 @@ namespace EFBulkInsert.Extensions
         }
     }
 }
+#endif

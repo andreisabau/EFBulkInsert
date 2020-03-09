@@ -1,4 +1,5 @@
-﻿using EFBulkInsert.Models;
+﻿#if NET452
+using EFBulkInsert.Models;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Core.Mapping;
@@ -94,3 +95,4 @@ namespace EFBulkInsert.Extensions
         }
     }
 }
+#endif

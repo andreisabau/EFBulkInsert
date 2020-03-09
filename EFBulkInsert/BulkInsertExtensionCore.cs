@@ -1,17 +1,18 @@
+#if NETSTANDARD2_0
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using EFBulkInsertCore.Extensions;
-using EFBulkInsertCore.Models;
+using EFBulkInsert.Extensions;
+using EFBulkInsert.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using static System.String;
 
-namespace EFBulkInsertCore
+namespace EFBulkInsert
 {
-    public static class BulkInsertExtension
+    public static class BulkInsertExtensionCore
     {
         public static void BulkInsert<T>(this DbContext dbContext, IEnumerable<T> entites, int batchSize = 5000)
         {
@@ -165,3 +166,4 @@ namespace EFBulkInsertCore
         }
     }
 }
+#endif
