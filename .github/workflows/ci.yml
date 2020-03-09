@@ -14,7 +14,8 @@ jobs:
         dotnet-version: '3.1.100'
     - name: Build
       run: dotnet build -c Release
-    - uses: actions/upload-artifact@v1
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
       with:
         name: EFBulkInsert.nupkg
-        path: EFBulkInsert\bin\Release\EFBulkInsert.*.nupkg
+        path: EFBulkInsert\bin\Release\EFBulkInsert.0.4.0.nupkg
