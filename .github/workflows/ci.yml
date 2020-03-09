@@ -8,16 +8,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Setup nuget
-      uses: warrenbuckley/Setup-Nuget@v1
     - name: Setup dotnet
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.100'
-    - name: Pack nuget
-      run: dotnet pack -c Release
-    - name: Add sourece to NuGet
-      run: nuget sources add -Name "GitHub" -Source "https://nuget.pkg.github.com/andreisabau/index.json" -Username andreisabau -Password ${{ secrets.GITHUB_TOKEN }}
-#    - name: Publish
-#      run: |
-#        nuget push "EFBulkInsert\bin\Release\EFBulkInsert.*.nupkg" -Source "GitHub"
+    - name: Build
+      run: dotnet build -c Release
