@@ -1,4 +1,5 @@
 ![CI](https://github.com/andreisabau/EFBulkInsert/workflows/CI/badge.svg?branch=master)
+![Nuget](https://img.shields.io/nuget/dt/EFBulkInsert)
 ## EFBulkInsert
 #### Provides an extension method over the Entity Framework DbContext for bulk insertion of entities.
 
