@@ -1,98 +1,60 @@
-﻿#if NET452
-using EFBulkInsert.Models;
 using System;
-using System.Data.Entity;
-using System.Data.Entity.Core.Mapping;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using System.Linq;
-using static System.String;
+using EFBulkInsert.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage;
 
-namespace EFBulkInsert.Extensions
+namespace EFBulkInsert.Extensions;
+
+internal static class DbContextExtensionsCore
 {
-    internal static class DbContextExtensions
+    public static SqlConnection GetSqlConnection(this DbContext dbContext)
     {
-        public static SqlConnection GetSqlConnection(this DbContext dbContext)
+        SqlConnection sqlConnection = (SqlConnection) dbContext.Database.GetDbConnection();
+
+        return sqlConnection;
+    }
+
+    public static SqlTransaction GetSqlTransaction(this DbContext dbContext)
+    {
+        SqlTransaction sqlTransaction = dbContext.Database.CurrentTransaction?.GetDbTransaction() as SqlTransaction;
+
+        return sqlTransaction;
+    }
+
+    public static EntityMetadata GetEntityMetadata<T>(this DbContext dbContext)
+    {
+        IEntityType entityType = dbContext.Model.FindEntityType(typeof(T));
+
+        EntityMetadata entityMetadata = new()
         {
-            SqlConnection sqlConnection = (SqlConnection)dbContext.Database.Connection;
-
-            return sqlConnection;
-        }
-
-        public static SqlTransaction GetSqlTransaction(this DbContext dbContext)
-        {
-            SqlTransaction sqlTransaction = (SqlTransaction)dbContext.Database.CurrentTransaction?.UnderlyingTransaction;
-
-            return sqlTransaction;
-        }
-
-        public static ObjectContext GetObjectContext(this DbContext dbContext)
-        {
-            ObjectContext objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
-
-            return objectContext;
-        }
-
-        public static EntityMetadata GetEntityMetadata<T>(this DbContext dbContext)
-        {
-            MetadataWorkspace metadataWorkspace = dbContext.GetObjectContext().MetadataWorkspace;
-            MappingFragment mappingFragment = metadataWorkspace.GetMapping<T>();
-            EntityType storageSpaceEntityType = mappingFragment.StoreEntitySet.ElementType;
-
-            EntityMetadata entityMetadata = new EntityMetadata
+            TempTableName = "##TEMP_" + Guid.NewGuid().ToString().Replace('-', '_'),
+            Type = typeof(T),
+            TableName = entityType.GetTableName(),
+            Properties = entityType.GetProperties().Select(x => new EntityProperty
             {
-                TempTableName = "##TEMP_" + Guid.NewGuid().ToString().Replace('-', '_'),
-                Type = typeof(T),
-                TableName = mappingFragment.GetTableName(),
-                Properties = storageSpaceEntityType.Properties.Select(x => new EntityProperty
-                {
-                    ColumnName = x.Name,
-                    IsDbGenerated = x.IsStoreGeneratedIdentity || x.IsStoreGeneratedComputed,
-                    SqlServerType = GetSqlServerType(x),
-                    IsNullable = x.Nullable,
-                    PropertyName = GetPropertyName(mappingFragment, x)
-                }).ToList()
-            };
+                ColumnName = x.GetColumnName(),
+                IsDbGenerated = x.ValueGenerated == ValueGenerated.OnAddOrUpdate || x.ValueGenerated == ValueGenerated.OnAdd,
+                SqlServerType = GetSqlServerType(x),
+                IsNullable = x.IsNullable,
+                PropertyName = x.Name
+            }).ToList()
+        };
 
-            return entityMetadata;
-        }
+        return entityMetadata;
+    }
 
-        private static string GetPropertyName(MappingFragment mappingFragment, EdmProperty x)
+    private static string GetSqlServerType(IProperty property)
+    {
+        string type = property.GetColumnType();
+
+        if (property.IsNullable)
         {
-            ScalarPropertyMapping scalarPropertyMapping = mappingFragment.PropertyMappings.Select(y => (ScalarPropertyMapping)y)
-                                                                                          .FirstOrDefault(y => y.Column.Name == x.Name);
-
-            if (scalarPropertyMapping != null)
-            {
-                return scalarPropertyMapping.Property.Name;
-            }
-
-            throw new Exception($"Cannot extract property name {x.Name}.");
+            type = $"{type} NULL";
         }
 
-        private static string GetSqlServerType(EdmProperty edmProperty)
-        {
-            string type = edmProperty.TypeName;
-
-            if (!edmProperty.IsMaxLengthConstant)
-            {
-                string length = edmProperty.Scale.HasValue ? edmProperty.Precision.HasValue ? $"({edmProperty.Precision},{edmProperty.Scale})"
-                                                                                            : $"({edmProperty.Precision})"
-                                                           : edmProperty.MaxLength.HasValue ? $"({edmProperty.MaxLength})"
-                                                                                            : Empty;
-
-                type = type + length;
-            }
-
-            if (edmProperty.Nullable)
-            {
-                type = $"{type} NULL";
-            }
-
-            return type;
-        }
+        return type;
     }
 }
-#endif

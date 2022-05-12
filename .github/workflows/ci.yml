@@ -6,16 +6,16 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '3.1.100'
-    - name: Build
-      run: dotnet build -c Release
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: EFBulkInsert
-        path: EFBulkInsert\bin\Release\EFBulkInsert.0.4.0.nupkg
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0"
+      - name: Build
+        run: dotnet build -c Release
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: EFBulkInsert
+          path: EFBulkInsert\bin\Release\EFBulkInsert.0.5.0.nupkg
