@@ -7,15 +7,18 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v7
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: "6.0"
+          dotnet-version: "6.0.x"
       - name: Build
         run: dotnet build -c Release
+      - name: Test
+        run: dotnet test -c Release --no-build
       - name: Upload artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v7
         with:
           name: EFBulkInsert
-          path: EFBulkInsert\bin\Release\EFBulkInsert.0.5.0.nupkg
+          path: EFBulkInsert/bin/Release/*.nupkg
+          if-no-files-found: error
